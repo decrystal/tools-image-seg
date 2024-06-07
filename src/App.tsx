@@ -37,7 +37,9 @@ function App() {
   })
 
   async function startWithDemoImage(img: string) {
-    const imgBlob = await fetch(`/examples/${img}.jpeg`).then(r => r.blob())
+    const imgBlob = await fetch(
+      `${import.meta.env.BASE_URL}/examples/${img}.jpeg`
+    ).then(r => r.blob())
     setFile(new File([imgBlob], `${img}.jpeg`, { type: 'image/jpeg' }))
   }
 
@@ -60,8 +62,8 @@ function App() {
             </span>
           </div>
         </Button>
-        <div className="text-4xl font-bold text-blue-600 hover:text-blue-700 transition duration-300 ease-in-out">
-          Inpaint-web
+        <div className="text-4xl font-bold text-blue-600 whitespace-nowrap hover:text-blue-700 transition duration-300 ease-in-out">
+          抠图(image-seg)
         </div>
         <div className="hidden md:flex justify-end w-[300px] mx-1 sm:mx-5">
           <Button
@@ -76,7 +78,7 @@ function App() {
           >
             <p>{languageTag() === 'en' ? '切换到中文' : 'en'}</p>
           </Button>
-          <Button
+          {/* <Button
             className="w-38 flex sm:visible"
             icon={<InformationCircleIcon className="w-6 h-6" />}
             onClick={() => {
@@ -84,7 +86,7 @@ function App() {
             }}
           >
             <p>{m.feedback()}</p>
-          </Button>
+          </Button> */}
         </div>
       </header>
 
@@ -124,7 +126,9 @@ function App() {
                       >
                         <img
                           className="rounded-md hover:opacity-75 w-auto h-25"
-                          src={`examples/${image}.jpeg`}
+                          src={`${
+                            import.meta.env.BASE_URL
+                          }/examples/${image}.jpeg`}
                           alt={image}
                           style={{ height: '100px' }}
                         />
